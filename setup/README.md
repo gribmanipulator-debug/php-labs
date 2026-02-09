@@ -51,14 +51,65 @@ cd setup
 
 ### ⚠️ Можливі проблеми
 
+**`php` не розпізнається (`The term 'php' is not recognized`):**
+PHP не встановлено або не додано до PATH. Використайте один з варіантів нижче (ручне встановлення або скрипт).
+
+**Scoop не встановлюється від адміністратора:**
+
+```
+Running the installer as administrator is disabled by default
+```
+
+Scoop **не працює** з правами адміністратора. Рішення:
+- **Закрийте** PowerShell
+- Відкрийте PowerShell **звичайним способом** (без "Запустити від імені адміністратора")
+- Повторіть встановлення
+
 **Помилка виконання скриптів:**
 
 ```powershell
 Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
 ```
 
+**Після встановлення PHP все ще не знаходиться:**
+Закрийте **всі** вікна PowerShell/Terminal та відкрийте нове. PATH оновлюється лише для нових вікон.
+
 **"Кракозябри" в консолі:**
 Переконайтесь, що файл збережено у кодуванні **UTF-8 без BOM**.
+
+> Більше рішень: [troubleshooting/windows.md](../troubleshooting/windows.md)
+
+### Ручне встановлення
+
+<details>
+<summary><b>PHP (без скрипта)</b></summary>
+
+1. Завантажте PHP: [windows.php.net/download](https://windows.php.net/download/) — **VS16 x64 Thread Safe** (zip)
+2. Розпакуйте в `C:\php`
+3. Додайте `C:\php` до системної змінної **PATH**:
+   - Win + R → `sysdm.cpl` → **Додатково** → **Змінні середовища**
+   - У **Path** додайте `C:\php`
+4. Перевірте: відкрийте нове вікно PowerShell → `php -v`
+
+</details>
+
+<details>
+<summary><b>Git (без скрипта)</b></summary>
+
+1. Завантажте Git: [git-scm.com/download/win](https://git-scm.com/download/win)
+2. Встановіть з параметрами за замовчуванням
+3. Перевірте: `git --version`
+
+</details>
+
+<details>
+<summary><b>Composer (для Laravel, ЛР 6-7)</b></summary>
+
+1. Завантажте: [getcomposer.org/download](https://getcomposer.org/download/) — **Composer-Setup.exe**
+2. Встановіть (інсталятор сам знайде PHP)
+3. Перевірте: `composer -V`
+
+</details>
 
 ### Альтернативні варіанти для Windows
 
