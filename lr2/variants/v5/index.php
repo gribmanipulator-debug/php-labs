@@ -1,6 +1,6 @@
 <?php
 /**
- *Index Page — LR2
+ * Variant 5 Index Page — LR2
  */
 
 require_once dirname(__DIR__, 3) . '/shared/templates/task_cards.php';
@@ -20,7 +20,7 @@ $tasks = [
     'task11_calc.php' => ['name' => 'Завдання 11'],
 ];
 
-$demoUrl = '/lr2/demo/index.php?from=v30';
+$demoUrl = '/lr2/demo/index.php?from=v5';
 ?>
 <!DOCTYPE html>
 <html lang="uk">

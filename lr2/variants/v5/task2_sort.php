@@ -1,9 +1,14 @@
 <?php
 /**
- * Завдання 2: Сортування міст у зворотному порядку
+ * Завдання 2: Сортування міст
+ *
+ * Варіант 5: за алфавітом (sort)
  */
 require_once __DIR__ . '/layout.php';
 
+/**
+ * Сортує міста в алфавітному порядку
+ */
 function sortCities(string $input): array
 {
     $cities = array_filter(array_map('trim', explode(' ', $input)));
@@ -25,13 +30,13 @@ $sorted = sortCities($input);
 ob_start();
 ?>
 <div class="demo-card">
-    <h2>Сортування міст (зворотне)</h2>
-    <p class="demo-subtitle">Введіть назви міст через пробіл — сортування від Я до А</p>
+    <h2>Сортування міст</h2>
+    <p class="demo-subtitle">Введіть назви міст через пробіл — сортування за алфавітом</p>
 
     <form method="post" class="demo-form">
         <div>
             <label for="cities">Міста (через пробіл)</label>
-            <input type="text" id="cities" name="cities" value="<?= htmlspecialchars($input) ?>" placeholder="Полтава Кременчук Лубни Миргород Гадяч Хорол Комсомольськ Горішні Плавні">
+            <input type="text" id="cities" name="cities" value="<?= htmlspecialchars($input) ?>" placeholder="Полтава Кременчук Лубни">
         </div>
         <button type="submit" class="btn-submit">Сортувати</button>
     </form>
@@ -49,7 +54,7 @@ ob_start();
     <div class="array-arrow">&#8595;</div>
 
     <div>
-        <h3 class="demo-section-title-success">Відсортовані (Я→А)</h3>
+        <h3 class="demo-section-title-success">Відсортовані (А→Я)</h3>
         <div class="array-display">
             <?php foreach ($sorted as $city): ?>
             <span class="array-item array-item-unique"><?= htmlspecialchars($city) ?></span>
@@ -58,7 +63,7 @@ ob_start();
     </div>
 
     <div class="demo-code">sortCities("<?= htmlspecialchars($input) ?>")
-// sort() —  алфавітний порядок
+// sort() — алфавітний порядок
 // Результат: [<?= htmlspecialchars(implode(', ', array_map(fn($c) => "\"$c\"", $sorted))) ?>]</div>
     <?php endif; ?>
 </div>
