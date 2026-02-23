@@ -9,9 +9,6 @@ function generateRedSquares(int $rows, int $cols): string
 {
     $squareSize = 80;
     $gap = 20;
-
-    $totalWidth = ($squareSize * $cols) + ($gap * ($cols - 1));
-    $totalHeight = ($squareSize * $rows) + ($gap * ($rows - 1));
     
     $html = "<div style='
         display: flex;
