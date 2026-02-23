@@ -28,4 +28,7 @@ Thumbs.db
 # Logs & Temp
 *.log
 *.swp
+
+# Uploads (user-generated files)
+**/uploads/
 *.swo
