@@ -8,10 +8,10 @@ require_once __DIR__ . '/layout.php';
 require_once __DIR__ . '/Product.php';
 
 // Оригінальний об'єкт (через конструктор)
-$product3 = new Musician('Артем Руденко', 'Скрипка', 14);
+$musician3 = new Musician('Артем Руденко', 'Скрипка', 14);
 
 // Клонуємо — __clone() задає значення за замовчанням
-$product4 = clone $product3;
+$musician4 = clone $musician3;
 
 ob_start();
 ?>
@@ -30,7 +30,7 @@ ob_start();
 }
 
 <span class="code-comment">// Створюємо 4-й об'єкт через clone</span>
-<span class="code-variable">$product4</span> = <span class="code-keyword">clone</span> <span class="code-variable">$product3</span>;</div>
+<span class="code-variable">$musician4</span> = <span class="code-keyword">clone</span> <span class="code-variable">$musician3</span>;</div>
 
 <div class="section-divider">
     <span class="section-divider-text">Оригінал vs Клон</span>
@@ -42,22 +42,22 @@ ob_start();
             <div class="user-card-header">
                 <div class="user-card-avatar avatar-amber">А</div>
                 <div>
-                    <div class="user-card-name"><?= htmlspecialchars($product3->name) ?></div>
-                    <div class="user-card-label">$product3 <span class="user-card-badge badge-constructor">original</span></div>
+                    <div class="user-card-name"><?= htmlspecialchars($musician3->name) ?></div>
+                    <div class="user-card-label">$musician3 <span class="user-card-badge badge-constructor">original</span></div>
                 </div>
             </div>
             <div class="user-card-body">
                 <div class="user-card-field">
                     <span class="user-card-field-label">name</span>
-                    <span class="user-card-field-value"><?= htmlspecialchars($product3->name) ?></span>
+                    <span class="user-card-field-value"><?= htmlspecialchars($musician3->name) ?></span>
                 </div>
                 <div class="user-card-field">
                     <span class="user-card-field-label">instrument</span>
-                    <span class="user-card-field-value"><?= htmlspecialchars($product3->instrument) ?></span>
+                    <span class="user-card-field-value"><?= htmlspecialchars($musician3->instrument) ?></span>
                 </div>
                 <div class="user-card-field">
                     <span class="user-card-field-label">yearsPlaying</span>
-                    <span class="user-card-field-value"><?= $product3->yearsPlaying ?> р.</span>
+                    <span class="user-card-field-value"><?= $musician3->yearsPlaying ?> р.</span>
                 </div>
             </div>
         </div>
@@ -66,22 +66,22 @@ ob_start();
             <div class="user-card-header">
                 <div class="user-card-avatar avatar-rose">Н</div>
                 <div>
-                    <div class="user-card-name"><?= htmlspecialchars($product4->name) ?></div>
-                    <div class="user-card-label">$product4 <span class="user-card-badge badge-clone">clone</span></div>
+                    <div class="user-card-name"><?= htmlspecialchars($musician4->name) ?></div>
+                    <div class="user-card-label">$musician4 <span class="user-card-badge badge-clone">clone</span></div>
                 </div>
             </div>
             <div class="user-card-body">
                 <div class="user-card-field">
                     <span class="user-card-field-label">name</span>
-                    <span class="user-card-field-value"><?= htmlspecialchars($product4->name) ?></span>
+                    <span class="user-card-field-value"><?= htmlspecialchars($musician4->name) ?></span>
                 </div>
                 <div class="user-card-field">
                     <span class="user-card-field-label">instrument</span>
-                    <span class="user-card-field-value"><?= htmlspecialchars($product4->instrument) ?></span>
+                    <span class="user-card-field-value"><?= htmlspecialchars($musician4->instrument) ?></span>
                 </div>
                 <div class="user-card-field">
                     <span class="user-card-field-label">yearsPlaying</span>
-                    <span class="user-card-field-value"><?= $product4->yearsPlaying ?> р.</span>
+                    <span class="user-card-field-value"><?= $musician4->yearsPlaying ?> р.</span>
                 </div>
             </div>
         </div>
@@ -96,12 +96,12 @@ ob_start();
     <div class="info-output-header">Результат getInfo() для оригіналу та клону</div>
     <div class="info-output-body">
         <div class="info-output-row">
-            <span class="info-output-label">$product3</span>
-            <span class="info-output-text"><?= htmlspecialchars($product3->getInfo()) ?></span>
+            <span class="info-output-label">$musician3</span>
+            <span class="info-output-text"><?= htmlspecialchars($musician3->getInfo()) ?></span>
         </div>
         <div class="info-output-row">
-            <span class="info-output-label">$product4</span>
-            <span class="info-output-text"><?= htmlspecialchars($product4->getInfo()) ?></span>
+            <span class="info-output-label">$musician4</span>
+            <span class="info-output-text"><?= htmlspecialchars($musician4->getInfo()) ?></span>
         </div>
     </div>
 </div>

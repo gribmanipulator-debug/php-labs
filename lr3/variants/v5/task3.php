@@ -8,14 +8,14 @@ require_once __DIR__ . '/layout.php';
 require_once __DIR__ . '/Product.php';
 
 // Створюємо 3 об'єкти через конструктор
-$product1 = new Musician('Олексій Лисенко', 'Гітара', 10);
-$product2 = new Musician('Марина Даниленко', 'Фортепіано', 7);
-$product3 = new Musician('Артем Руденко', 'Скрипка', 14);
+$musician1 = new Musician('Олексій Лисенко', 'Гітара', 10);
+$musician2 = new Musician('Марина Даниленко', 'Фортепіано', 7);
+$musician3 = new Musician('Артем Руденко', 'Скрипка', 14);
 
-$products = [
-    ['obj' => $product1, 'avatar' => 'avatar-indigo', 'initial' => 'О', 'var' => '$product1'],
-    ['obj' => $product2, 'avatar' => 'avatar-green', 'initial' => 'М', 'var' => '$product2'],
-    ['obj' => $product3, 'avatar' => 'avatar-amber', 'initial' => 'А', 'var' => '$product3'],
+$musicians = [
+    ['obj' => $musician1, 'avatar' => 'avatar-indigo', 'initial' => 'О', 'var' => '$musician1'],
+    ['obj' => $musician2, 'avatar' => 'avatar-green', 'initial' => 'М', 'var' => '$musician2'],
+    ['obj' => $musician3, 'avatar' => 'avatar-amber', 'initial' => 'А', 'var' => '$musician3'],
 ];
 
 ob_start();
@@ -35,16 +35,16 @@ ob_start();
 }
 
 <span class="code-comment">// Створення через конструктор</span>
-<span class="code-variable">$product1</span> = <span class="code-keyword">new</span> <span class="code-class">Musician</span>(<span class="code-string">'Олексій Лисенко'</span>, <span class="code-string">'Гітара'</span>, <span class="code-string">10</span>);
-<span class="code-variable">$product2</span> = <span class="code-keyword">new</span> <span class="code-class">Musician</span>(<span class="code-string">'Марина Даниленко'</span>, <span class="code-string">'Фортепіано'</span>, <span class="code-string">7</span>);
-<span class="code-variable">$product3</span> = <span class="code-keyword">new</span> <span class="code-class">Musician</span>(<span class="code-string">'Артем Руденко'</span>, <span class="code-string">'Скрипка'</span>, <span class="code-string">14</span>);</div>
+<span class="code-variable">$musician1</span> = <span class="code-keyword">new</span> <span class="code-class">Musician</span>(<span class="code-string">'Олексій Лисенко'</span>, <span class="code-string">'Гітара'</span>, <span class="code-string">10</span>);
+<span class="code-variable">$musician2</span> = <span class="code-keyword">new</span> <span class="code-class">Musician</span>(<span class="code-string">'Марина Даниленко'</span>, <span class="code-string">'Фортепіано'</span>, <span class="code-string">7</span>);
+<span class="code-variable">$musician3</span> = <span class="code-keyword">new</span> <span class="code-class">Musician</span>(<span class="code-string">'Артем Руденко'</span>, <span class="code-string">'Скрипка'</span>, <span class="code-string">14</span>);</div>
 
 <div class="section-divider">
     <span class="section-divider-text">Об'єкти створені через конструктор</span>
 </div>
 
 <div class="users-grid">
-    <?php foreach ($products as $data): ?>
+    <?php foreach ($musicians as $data): ?>
     <div class="user-card">
         <div class="user-card-header">
             <div class="user-card-avatar <?= $data['avatar'] ?>"><?= $data['initial'] ?></div>
@@ -78,7 +78,7 @@ ob_start();
 <div class="info-output">
     <div class="info-output-header">Виклик getInfo() для об'єктів, створених через конструктор</div>
     <div class="info-output-body">
-        <?php foreach ($products as $data): ?>
+        <?php foreach ($musicians as $data): ?>
         <div class="info-output-row">
             <span class="info-output-label"><?= $data['var'] ?></span>
             <span class="info-output-text"><?= htmlspecialchars($data['obj']->getInfo()) ?></span>
