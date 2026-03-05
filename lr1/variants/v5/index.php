@@ -36,7 +36,7 @@ $demoUrl = '/lr1/demo/index.php?from=v5';
     </header>
 
     <h1 class="index-title">
-        Варіант 30
+        Варіант 5
         <br><span class="index-subtitle">Лабораторна робота №1</span>
     </h1>
 

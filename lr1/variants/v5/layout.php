@@ -1,6 +1,6 @@
 <?php
 /**
- * Shared layout template for LR1 Variant 30 task pages
+ * Shared layout template for LR1 Variant 5 task pages
  */
 
 require_once dirname(__DIR__, 3) . '/shared/helpers/dev_reload.php';
