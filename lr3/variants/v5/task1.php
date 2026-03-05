@@ -24,9 +24,9 @@ $product3->instrument = 'Скрипка';
 $product3->yearsPlaying = 14;
 
 $products = [
-    ['obj' => $product1, 'avatar' => 'avatar-indigo', 'initial' => 'Н'],
-    ['obj' => $product2, 'avatar' => 'avatar-green', 'initial' => 'К'],
-    ['obj' => $product3, 'avatar' => 'avatar-amber', 'initial' => 'Р'],
+    ['obj' => $product1, 'avatar' => 'avatar-indigo', 'initial' => 'О'],
+    ['obj' => $product2, 'avatar' => 'avatar-green', 'initial' => 'М'],
+    ['obj' => $product3, 'avatar' => 'avatar-amber', 'initial' => 'А'],
 ];
 
 ob_start();
