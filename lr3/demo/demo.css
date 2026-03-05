@@ -1,9 +1,7 @@
 /**
  * Styles for LR3 demo pages (OOP lab)
- * Imports base.css for CSS variables
+ * base.css is loaded via <link> in PHP templates (paths.php helper)
  */
-
-@import 'shared/css/base.css';
 
 /* ===== User Card Component ===== */
 .user-card {
@@ -107,7 +105,7 @@
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 20px;
   width: 100%;
-  max-width: 920px;
+  max-width: 100%;
 }
 
 /* ===== Task Section Headers ===== */
@@ -115,7 +113,7 @@
   text-align: center;
   margin-bottom: 30px;
   width: 100%;
-  max-width: 920px;
+  max-width: 100%;
 }
 .task-header h1 {
   font-size: 28px;
@@ -139,7 +137,7 @@
   line-height: 1.7;
   overflow-x: auto;
   width: 100%;
-  max-width: 920px;
+  max-width: 100%;
   white-space: pre;
 }
 .code-keyword { color: #cba6f7; }
@@ -156,8 +154,9 @@
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-md);
   overflow: hidden;
+  flex-shrink: 0;
   width: 100%;
-  max-width: 920px;
+  max-width: 100%;
 }
 .info-output-header {
   background: var(--color-bg-alt);
@@ -199,7 +198,7 @@
 /* ===== Section Divider ===== */
 .section-divider {
   width: 100%;
-  max-width: 920px;
+  max-width: 100%;
   display: flex;
   align-items: center;
   gap: 16px;
@@ -224,7 +223,7 @@
 /* ===== Comparison (Task 4: Clone) ===== */
 .comparison-wrapper {
   width: 100%;
-  max-width: 920px;
+  max-width: 100%;
 }
 .comparison-arrow {
   text-align: center;
