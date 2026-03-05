@@ -37,7 +37,7 @@ function generateRedSquares(int $rows, int $cols): string
     $html .= "</div>";
     return $html;
 }
-
+$n=20;
 $rows = 4;
 $cols = 5;
 $squares = generateRedSquares($rows, $cols);
