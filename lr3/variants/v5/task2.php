@@ -8,23 +8,23 @@ require_once __DIR__ . '/layout.php';
 require_once __DIR__ . '/Product.php';
 
 // Створюємо 3 об'єкти
-$product1 = new Musician();
-$product1->name = 'Олексій Лисенко';
-$product1->instrument = 'Гітара';
-$product1->yearsPlaying = 10;
+$musician1 = new Musician();
+$musician1->name = 'Олексій Лисенко';
+$musician1->instrument = 'Гітара';
+$musician1->yearsPlaying = 10;
 
-$product2 = new Musician();
-$product2->name = 'Марина Даниленко';
-$product2->instrument = 'Фортепіано';
-$product2->yearsPlaying = 7;
+$musician2 = new Musician();
+$musician2->name = 'Марина Даниленко';
+$musician2->instrument = 'Фортепіано';
+$musician2->yearsPlaying = 7;
 
-$product3 = new Musician();
-$product3->name = 'Артем Руденко';
-$product3->instrument = 'Скрипка';
-$product3->yearsPlaying = 14;
+$musician3 = new Musician();
+$musician3->name = 'Артем Руденко';
+$musician3->instrument = 'Скрипка';
+$musician3->yearsPlaying = 14;
 
-$products = [$product1, $product2, $product3];
-$labels = ['$product1', '$product2', '$product3'];
+$musicians = [$musician1, $musician2, $musician3];
+$labels = ['$musician1', '$musician2', '$musician3'];
 
 ob_start();
 ?>
@@ -41,7 +41,7 @@ ob_start();
 }
 
 <span class="code-comment">// Виклик для кожного об'єкта</span>
-<span class="code-variable">$product1</span><span class="code-arrow">-></span><span class="code-method">getInfo</span>();</div>
+<span class="code-variable">$musician1</span><span class="code-arrow">-></span><span class="code-method">getInfo</span>();</div>
 
 <div class="section-divider">
     <span class="section-divider-text">Результат виклику</span>
@@ -50,10 +50,10 @@ ob_start();
 <div class="info-output">
     <div class="info-output-header">getInfo() — вивід для кожного об'єкта</div>
     <div class="info-output-body">
-        <?php foreach ($products as $i => $product): ?>
+        <?php foreach ($musicians as $i => $musician): ?>
         <div class="info-output-row">
             <span class="info-output-label"><?= $labels[$i] ?></span>
-            <span class="info-output-text"><?= htmlspecialchars($product->getInfo()) ?></span>
+            <span class="info-output-text"><?= htmlspecialchars($musician->getInfo()) ?></span>
         </div>
         <?php endforeach; ?>
     </div>
@@ -67,28 +67,28 @@ ob_start();
     <?php
     $avatars = ['avatar-indigo', 'avatar-green', 'avatar-amber'];
     $initials = ['О', 'М', 'А'];
-    foreach ($products as $i => $product):
+    foreach ($musicians as $i => $musician):
     ?>
     <div class="user-card">
         <div class="user-card-header">
             <div class="user-card-avatar <?= $avatars[$i] ?>"><?= $initials[$i] ?></div>
             <div>
-                <div class="user-card-name"><?= htmlspecialchars($product->name) ?></div>
+                <div class="user-card-name"><?= htmlspecialchars($musician->name) ?></div>
                 <div class="user-card-label"><?= $labels[$i] ?>->getInfo()</div>
             </div>
         </div>
         <div class="user-card-body">
             <div class="user-card-field">
                 <span class="user-card-field-label">name</span>
-                <span class="user-card-field-value"><?= htmlspecialchars($product->name) ?></span>
+                <span class="user-card-field-value"><?= htmlspecialchars($musician->name) ?></span>
             </div>
             <div class="user-card-field">
                 <span class="user-card-field-label">instrument</span>
-                <span class="user-card-field-value"><?= htmlspecialchars($product->instrument) ?></span>
+                <span class="user-card-field-value"><?= htmlspecialchars($musician->instrument) ?></span>
             </div>
             <div class="user-card-field">
                 <span class="user-card-field-label">yearsPlaying</span>
-                <span class="user-card-field-value"><?= $product->yearsPlaying ?> р.</span>
+                <span class="user-card-field-value"><?= $musician->yearsPlaying ?> р.</span>
             </div>
         </div>
     </div>

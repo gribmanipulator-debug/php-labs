@@ -8,25 +8,25 @@ require_once __DIR__ . '/layout.php';
 require_once __DIR__ . '/Product.php';
 
 // Створюємо 3 об'єкти з довільними значеннями
-$product1 = new Musician();
-$product1->name = 'Олексій Лисенко';
-$product1->instrument = 'Гітара';
-$product1->yearsPlaying = 10;
+$musician1 = new Musician();
+$musician1->name = 'Олексій Лисенко';
+$musician1->instrument = 'Гітара';
+$musician1->yearsPlaying = 10;
 
-$product2 = new Musician();
-$product2->name = 'Марина Даниленко';
-$product2->instrument = 'Фортепіано';
-$product2->yearsPlaying = 7;
+$musician2 = new Musician();
+$musician2->name = 'Марина Даниленко';
+$musician2->instrument = 'Фортепіано';
+$musician2->yearsPlaying = 7;
 
-$product3 = new Musician();
-$product3->name = 'Артем Руденко';
-$product3->instrument = 'Скрипка';
-$product3->yearsPlaying = 14;
+$musician3 = new Musician();
+$musician3->name = 'Артем Руденко';
+$musician3->instrument = 'Скрипка';
+$musician3->yearsPlaying = 14;
 
 $products = [
-    ['obj' => $product1, 'avatar' => 'avatar-indigo', 'initial' => 'О'],
-    ['obj' => $product2, 'avatar' => 'avatar-green', 'initial' => 'М'],
-    ['obj' => $product3, 'avatar' => 'avatar-amber', 'initial' => 'А'],
+    ['obj' => $musician1, 'avatar' => 'avatar-indigo', 'initial' => 'О'],
+    ['obj' => $musician2, 'avatar' => 'avatar-green', 'initial' => 'М'],
+    ['obj' => $musician3, 'avatar' => 'avatar-amber', 'initial' => 'А'],
 ];
 
 ob_start();
@@ -38,10 +38,10 @@ ob_start();
 </div>
 
 <div class="code-block"><span class="code-comment">// Створюємо об'єкт та задаємо властивості</span>
-<span class="code-variable">$product1</span> = <span class="code-keyword">new</span> <span class="code-class">Musician</span>();
-<span class="code-variable">$product1</span><span class="code-arrow">-></span><span class="code-method">name</span> = <span class="code-string">'Олексій Лисенко'</span>;
-<span class="code-variable">$product1</span><span class="code-arrow">-></span><span class="code-method">instrument</span> = <span class="code-string">'Гітара'</span>;
-<span class="code-variable">$product1</span><span class="code-arrow">-></span><span class="code-method">yearsPlaying</span> = <span class="code-number">10</span>;</div>
+<span class="code-variable">$musician1</span> = <span class="code-keyword">new</span> <span class="code-class">Musician</span>();
+<span class="code-variable">$musician1</span><span class="code-arrow">-></span><span class="code-method">name</span> = <span class="code-string">'Олексій Лисенко'</span>;
+<span class="code-variable">$musician1</span><span class="code-arrow">-></span><span class="code-method">instrument</span> = <span class="code-string">'Гітара'</span>;
+<span class="code-variable">$musician1</span><span class="code-arrow">-></span><span class="code-method">yearsPlaying</span> = <span class="code-number">10</span>;</div>
 
 <div class="section-divider">
     <span class="section-divider-text">3 об'єкти</span>
