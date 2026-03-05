@@ -2,7 +2,7 @@
 /**
  * Завдання 6.2
  */
-
+require_once __DIR__ . '/layout.php';
 require_once dirname(__DIR__, 3) . '/shared/helpers/dev_reload.php';
 
 function generateRedSquares(int $rows, int $cols): string
@@ -41,36 +41,9 @@ function generateRedSquares(int $rows, int $cols): string
 $rows = 4;
 $cols = 5;
 $squares = generateRedSquares($rows, $cols);
-?>
-<!DOCTYPE html>
-<html lang="uk">
-<head>
-    <meta charset="UTF-8">
-    <title>Завдання 6.2 — 4 рядки × 5 червоних квадратів</title>
-    <link rel="stylesheet" href="../../demo/demo.css">
-    <style>
-        body { margin: 0; padding: 0; overflow: hidden; }
-    </style>
-</head>
-<body>
-    <header class="header-fixed">
-        <div class="header-left">
-            <a href="/" class="header-btn">Головна</a>
-            <a href="index.php" class="header-btn">← Варіант 5</a>
-        </div>
-        <div class="header-center"></div>
-        <div class="header-right">В-5 / Завд. 6.2</div>
-    </header>
+$content = $squares . '
+    <div class="circles-func">generateRedSquares(' . $n . ')</div>
+    <div class="circles-counter">🔺 Квадратів: ' . $n . '</div>
+    <p class="circles-info">Оновіть сторінку для нової композиції 🔄</p>';
 
-    <?= $squares ?>
-
-    <div style="position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); 
-                color: white; background: rgba(0,0,0,0.7); padding: 10px 20px; 
-                border-radius: 8px; font-family: monospace;">
-        generateRedSquares(<?= $rows ?>, <?= $cols ?>)
-        <br>Квадратів: <?= $rows * $cols ?>
-    </div>
-
-    <?= devReloadScript() ?>
-</body>
-</html>
+renderVariantLayout($content, 'Завдання 6.2', 'task7-squares-body');
