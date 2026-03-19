@@ -9,6 +9,7 @@
                 Переглядайте популярні моделі, порівнюйте комплектації
                 та орієнтовну вартість нових авто.
             </p>
+            <a href="index.php?route=index/catalog" class="btn btn--small">Відкрити каталог</a>
         </div>
 
         <div class="card">

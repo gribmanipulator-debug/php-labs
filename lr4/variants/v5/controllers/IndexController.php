@@ -6,4 +6,9 @@ class IndexController extends PageController
     {
         $this->render('index/main', [], 'Головна');
     }
+
+    public function action_catalog(): void
+    {
+        $this->render('index/catalog', [], 'Каталог автомобілів');
+    }
 }

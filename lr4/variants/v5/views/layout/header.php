@@ -13,6 +13,7 @@ $currentRoute = $_GET['route'] ?? 'index/main';
 
 $navItems = [
     'index/main' => 'Головна',
+    'index/catalog' => 'Каталог авто',
     'regform/form' => 'Калькулятор',
     'reqview/showrequest' => 'Параметри запиту',
     'settings/color' => 'Колір фону',
