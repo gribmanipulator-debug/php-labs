@@ -5,7 +5,7 @@
     <div class="card-grid">
         <article class="card card--car">
             <div class="car-card__media">
-                <img class="car-card__image" src="images/cars/toyota-corolla.svg" alt="Toyota Corolla" loading="lazy" decoding="async">
+                <img class="car-card__image" src="https://scene7.toyota.eu/is/image/toyotaeurope/CORS0004a_25_WEB_CROP-1:Large-Landscape?ts=0&resMode=sharp2&op_usm=1.75,0.3,2,0&fmt=png-alpha" alt="Toyota Corolla" loading="lazy" decoding="async">
             </div>
             <div class="car-card__content">
                 <h3 class="card__title">Toyota Corolla</h3>
@@ -15,7 +15,7 @@
 
         <article class="card card--car">
             <div class="car-card__media">
-                <img class="car-card__image" src="images/cars/skoda-octavia.svg" alt="Skoda Octavia" loading="lazy" decoding="async">
+                <img class="car-card__image" src="https://cdn.skoda-storyboard.com/2016/12/161220-0ctavia-RS-1.jpg" alt="Skoda Octavia" loading="lazy" decoding="async">
             </div>
             <div class="car-card__content">
                 <h3 class="card__title">Skoda Octavia</h3>
@@ -25,7 +25,7 @@
 
         <article class="card card--car">
             <div class="car-card__media">
-                <img class="car-card__image" src="images/cars/volkswagen-tiguan.svg" alt="Volkswagen Tiguan" loading="lazy" decoding="async">
+                <img class="car-card__image" src="https://hips.hearstapps.com/hmg-prod/images/2026-volkswagen-tiguan-sel-r-line-turbo-avocado-pr-107-67fe9bc628452.jpg?crop=0.609xw:0.456xh;0.244xw,0.370xh&resize=1200:*" alt="Volkswagen Tiguan" loading="lazy" decoding="async">
             </div>
             <div class="car-card__content">
                 <h3 class="card__title">Volkswagen Tiguan</h3>
@@ -35,7 +35,7 @@
 
         <article class="card card--car">
             <div class="car-card__media">
-                <img class="car-card__image" src="images/cars/kia-sportage.svg" alt="Kia Sportage" loading="lazy" decoding="async">
+                <img class="car-card__image" src="https://s7d9.scene7.com/is/image/kiamotors/my26-sportage-ice-exterior-feat-show-exclusive-x-line-and-x-pro-design:S?dpr=on%2C2.625" alt="Kia Sportage" loading="lazy" decoding="async">
             </div>
             <div class="car-card__content">
                 <h3 class="card__title">Kia Sportage</h3>
