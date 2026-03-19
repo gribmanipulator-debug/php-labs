@@ -13,7 +13,10 @@ class Controller
 
     public function redirect(string $route): void
     {
-        header('Location: index.php?route=' . $route);
+        $baseUrl = defined('BASE_URL') ? BASE_URL : '';
+        $normalizedRoute = ltrim($route, '/');
+
+        header('Location: ' . $baseUrl . '/index.php?route=' . $normalizedRoute);
         exit;
     }
 }

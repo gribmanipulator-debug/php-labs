@@ -24,6 +24,7 @@ $navItems = [
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <base href="<?= htmlspecialchars((defined('BASE_URL') ? BASE_URL : '') . '/') ?>">
     <title><?= htmlspecialchars(($pageTitle ?? '') !== '' ? $pageTitle : 'Автосалон') ?> — Автосалон</title>
     <link rel="stylesheet" href="css/style.css">
 </head>

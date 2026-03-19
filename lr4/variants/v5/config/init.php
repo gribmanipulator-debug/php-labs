@@ -2,6 +2,10 @@
 
 session_start();
 
+$scriptName = str_replace('\\', '/', $_SERVER['SCRIPT_NAME'] ?? '/index.php');
+$baseUrl = rtrim(dirname($scriptName), '/');
+define('BASE_URL', $baseUrl === '/' ? '' : $baseUrl);
+
 define('ROOT_DIR', dirname(__DIR__));
 define('CLASSES_DIR', ROOT_DIR . '/classes');
 define('CONTROLLERS_DIR', ROOT_DIR . '/controllers');

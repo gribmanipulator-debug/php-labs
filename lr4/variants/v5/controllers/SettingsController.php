@@ -17,7 +17,10 @@ class SettingsController extends PageController
         $defaultColor = '#F8F8FF';
 
         if ($this->request->isPost()) {
-            $color = $this->request->postString('bg_color', $defaultColor);
+            $color = strtoupper(trim($this->request->postString('bg_color', $defaultColor)));
+            if ($color !== '' && $color[0] !== '#') {
+                $color = '#' . $color;
+            }
 
             if (array_key_exists($color, $this->availableColors)) {
                 $_SESSION['bg_color'] = $color;
