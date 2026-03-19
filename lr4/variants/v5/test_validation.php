@@ -1,6 +1,6 @@
 <?php
 /**
- * Automated test for v30 RegformController validation.
+ * Automated test for v5 RegformController validation.
  * Run: php test_validation.php
  */
 
@@ -13,15 +13,44 @@ if (PHP_VERSION_ID < 80100) {
 }
 
 $tests = [
-    ['name' => 'Empty login', 'data' => ['login' => '', 'password' => 'test1', 'password_confirm' => 'test1'], 'expectKey' => 'login'],
-    ['name' => 'Login with spaces', 'data' => ['login' => 'hello world', 'password' => 'test1', 'password_confirm' => 'test1'], 'expectKey' => 'login', 'expectContains' => 'одним словом'],
-    ['name' => 'Login too short', 'data' => ['login' => 'abc', 'password' => 'test1', 'password_confirm' => 'test1'], 'expectKey' => 'login', 'expectContains' => '5 символів'],
-    ['name' => 'Login with digits', 'data' => ['login' => 'hello123', 'password' => 'test1', 'password_confirm' => 'test1'], 'expectKey' => 'login', 'expectContains' => 'цифри'],
-    ['name' => 'Empty password', 'data' => ['login' => 'chefdemo', 'password' => '', 'password_confirm' => ''], 'expectKey' => 'password'],
-    ['name' => 'Password too short', 'data' => ['login' => 'chefdemo', 'password' => 'ab1', 'password_confirm' => 'ab1'], 'expectKey' => 'password', 'expectContains' => '5 символів'],
-    ['name' => 'Password no digit', 'data' => ['login' => 'chefdemo', 'password' => 'testtest', 'password_confirm' => 'testtest'], 'expectKey' => 'password', 'expectContains' => 'одну цифру'],
-    ['name' => 'Password mismatch', 'data' => ['login' => 'chefdemo', 'password' => 'test123', 'password_confirm' => 'other456'], 'expectKey' => 'password_confirm', 'expectContains' => 'не збігаються'],
-    ['name' => 'All valid', 'data' => ['login' => 'chefdemo', 'password' => 'recipe1', 'password_confirm' => 'recipe1', 'about' => 'I love cooking'], 'expectEmpty' => true],
+    [
+        'name' => 'Empty number 1',
+        'data' => ['number1' => '', 'number2' => '10', 'operation' => 'sum', 'expected_result' => '10'],
+        'expectKey' => 'number1',
+    ],
+    [
+        'name' => 'Number 2 is not numeric',
+        'data' => ['number1' => '10', 'number2' => 'abc', 'operation' => 'sum', 'expected_result' => '10'],
+        'expectKey' => 'number2',
+        'expectContains' => 'має бути число',
+    ],
+    [
+        'name' => 'Invalid operation',
+        'data' => ['number1' => '10', 'number2' => '5', 'operation' => 'pow', 'expected_result' => '15'],
+        'expectKey' => 'operation',
+    ],
+    [
+        'name' => 'Division by zero',
+        'data' => ['number1' => '100', 'number2' => '0', 'operation' => 'div', 'expected_result' => '0'],
+        'expectKey' => 'number2',
+        'expectContains' => 'Ділення на нуль неможливе',
+    ],
+    [
+        'name' => 'Wrong expected result',
+        'data' => ['number1' => '50', 'number2' => '5', 'operation' => 'mul', 'expected_result' => '200'],
+        'expectKey' => 'expected_result',
+        'expectContains' => 'Невірний результат',
+    ],
+    [
+        'name' => 'Valid subtraction',
+        'data' => ['number1' => '120000', 'number2' => '30000', 'operation' => 'sub', 'expected_result' => '90000'],
+        'expectEmpty' => true,
+    ],
+    [
+        'name' => 'Valid decimal with comma',
+        'data' => ['number1' => '10,5', 'number2' => '2', 'operation' => 'div', 'expected_result' => '5.25'],
+        'expectEmpty' => true,
+    ],
 ];
 
 $passed = 0;

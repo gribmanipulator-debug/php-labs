@@ -6,7 +6,7 @@ $currentGender = $currentGender ?? '';
 ?>
 
 <h1>Привітання (Cookie)</h1>
-<p>Введіть ваше ім'я та стать. Привітання зберігається в cookie на 30 днів і відображається на всіх сторінках.</p>
+<p>Введіть ім'я та стать (ЧОЛ/ЖІН). Привітання зберігається в cookie на 30 днів і відображається на всіх сторінках.</p>
 
 <?php if ($message !== ''): ?>
     <div class="alert alert--<?= $messageType === 'error' ? 'error' : 'success' ?>"><?= htmlspecialchars($message) ?></div>
@@ -36,12 +36,12 @@ $currentGender = $currentGender ?? '';
             <label class="form__radio">
                 <input type="radio" name="greeting_gender" value="male"
                        <?= $currentGender === 'male' ? 'checked' : '' ?>>
-                Чоловіча
+                ЧОЛ
             </label>
             <label class="form__radio">
                 <input type="radio" name="greeting_gender" value="female"
                        <?= $currentGender === 'female' ? 'checked' : '' ?>>
-                Жіноча
+                ЖІН
             </label>
         </div>
     </div>

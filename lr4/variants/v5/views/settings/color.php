@@ -1,12 +1,12 @@
 <?php
 $colors = $colors ?? [];
-$currentColor = $currentColor ?? '#FFF8E1';
+$currentColor = $currentColor ?? '#F8F8FF';
 $message = $message ?? '';
 $messageType = $messageType ?? 'success';
 ?>
 
 <h1>Колір фону</h1>
-<p>Оберіть колір фону для кулінарного блогу. Зміна зберігається в сесії.</p>
+<p>Оберіть колір фону для сайту автосалону. Зміна зберігається в сесії та застосовується на всіх сторінках.</p>
 
 <?php if ($message !== ''): ?>
     <div class="alert alert--<?= $messageType === 'error' ? 'error' : 'success' ?>"><?= htmlspecialchars($message) ?></div>

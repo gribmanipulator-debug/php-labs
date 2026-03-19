@@ -12,24 +12,24 @@ $method = $method ?? 'GET';
         <p>Надішліть POST-запит з довільними даними:</p>
         <form method="POST" action="index.php?route=reqview/showrequest&source=form" class="form">
             <div class="form__group">
-                <label for="post_recipe" class="form__label">Назва рецепту</label>
-                <input type="text" id="post_recipe" name="recipe" class="form__input" placeholder="Борщ">
+                <label for="post_model" class="form__label">Модель авто</label>
+                <input type="text" id="post_model" name="model" class="form__input" placeholder="Toyota Corolla">
             </div>
             <div class="form__group">
-                <label for="post_ingredients" class="form__label">Інгредієнти</label>
-                <textarea id="post_ingredients" name="ingredients" class="form__textarea" rows="3"
-                          placeholder="Буряк, капуста, картопля..."></textarea>
+                <label for="post_service" class="form__label">Послуга</label>
+                <textarea id="post_service" name="service" class="form__textarea" rows="3"
+                          placeholder="Тест-драйв, кредитування, страхування..."></textarea>
             </div>
             <div class="form__group">
-                <label for="post_time" class="form__label">Час приготування (хв)</label>
-                <input type="number" id="post_time" name="cooking_time" class="form__input" placeholder="60">
+                <label for="post_budget" class="form__label">Бюджет (грн)</label>
+                <input type="number" id="post_budget" name="budget" class="form__input" placeholder="800000">
             </div>
             <button type="submit" class="btn">Надіслати POST</button>
         </form>
 
         <h3>GET-параметри в URL</h3>
         <p>Додайте параметри до URL, наприклад:</p>
-        <code class="code-block">index.php?route=reqview/showrequest&recipe=Borshch&servings=4</code>
+        <code class="code-block">index.php?route=reqview/showrequest&model=Skoda%20Octavia&year=2024</code>
     </div>
 
     <div class="reqview-section">

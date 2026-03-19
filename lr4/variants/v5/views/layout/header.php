@@ -1,5 +1,5 @@
 <?php
-$bgColor = $_SESSION['bg_color'] ?? '#FFF8E1';
+$bgColor = $_SESSION['bg_color'] ?? '#F8F8FF';
 $greetingName = is_string($_COOKIE['greeting_name'] ?? '') ? ($_COOKIE['greeting_name'] ?? '') : '';
 $greetingGender = is_string($_COOKIE['greeting_gender'] ?? '') ? ($_COOKIE['greeting_gender'] ?? '') : '';
 
@@ -13,7 +13,7 @@ $currentRoute = $_GET['route'] ?? 'index/main';
 
 $navItems = [
     'index/main' => 'Головна',
-    'regform/form' => 'Реєстрація',
+    'regform/form' => 'Калькулятор',
     'reqview/showrequest' => 'Параметри запиту',
     'settings/color' => 'Колір фону',
     'settings/greeting' => 'Привітання',
@@ -24,14 +24,14 @@ $navItems = [
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?= htmlspecialchars(($pageTitle ?? '') !== '' ? $pageTitle : 'Кулінарний блог') ?> — Кулінарний блог</title>
+    <title><?= htmlspecialchars(($pageTitle ?? '') !== '' ? $pageTitle : 'Автосалон') ?> — Автосалон</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body style="background-color: <?= htmlspecialchars($bgColor) ?>">
     <header class="header">
         <div class="container">
             <div class="header__inner">
-                <a href="index.php" class="header__logo">Кулінарний блог</a>
+                <a href="index.php" class="header__logo">Автосалон</a>
                 <?php if ($greetingText !== ''): ?>
                     <span class="header__greeting"><?= $greetingText ?></span>
                 <?php endif; ?>
