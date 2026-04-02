@@ -13,6 +13,8 @@ $user = $user ?? [];
             <tr><td><strong>E-mail</strong></td><td><?= htmlspecialchars($user['email'] ?? '') ?></td></tr>
             <tr><td><strong>Телефон</strong></td><td><?= htmlspecialchars($user['phone'] ?? '-') ?></td></tr>
             <tr><td><strong>Місто</strong></td><td><?= htmlspecialchars($user['city'] ?? '-') ?></td></tr>
+            <tr><td><strong>Дата народження</strong></td><td><?= htmlspecialchars($user['birthday'] ?? '-') ?></td></tr>
+            <tr><td><strong>Вебсайт</strong></td><td><?= htmlspecialchars($user['website'] ?? '-') ?></td></tr>
             <tr><td><strong>Стать</strong></td><td><?= ($user['gender'] ?? '') === 'female' ? 'Жіноча' : (($user['gender'] ?? '') === 'male' ? 'Чоловіча' : '-') ?></td></tr>
             <tr><td><strong>Про себе</strong></td><td><?= htmlspecialchars($user['about'] ?? '-') ?></td></tr>
             <tr><td><strong>Дата реєстрації</strong></td><td><?= htmlspecialchars($user['created_at'] ?? '') ?></td></tr>

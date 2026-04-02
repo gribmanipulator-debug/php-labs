@@ -31,7 +31,7 @@ $old = $old ?? [];
         <div class="form__group <?= isset($errors['password']) ? 'form__group--error' : '' ?>">
             <label for="reg_password" class="form__label">Пароль <span class="required">*</span></label>
             <input type="password" id="reg_password" name="password" class="form__input"
-                   placeholder="Мінімум 6 символів">
+                   placeholder="Мінімум 8 символів">
             <?php if (isset($errors['password'])): ?>
                 <span class="form__error"><?= htmlspecialchars($errors['password']) ?></span>
             <?php endif; ?>
@@ -89,6 +89,27 @@ $old = $old ?? [];
             <label for="reg_city" class="form__label">Місто</label>
             <input type="text" id="reg_city" name="city" class="form__input"
                    value="<?= htmlspecialchars($old['city'] ?? '') ?>">
+        </div>
+    </div>
+
+    <div class="form__row">
+        <div class="form__group <?= isset($errors['birthday']) ? 'form__group--error' : '' ?>">
+            <label for="reg_birthday" class="form__label">Дата народження</label>
+            <input type="date" id="reg_birthday" name="birthday" class="form__input"
+                   value="<?= htmlspecialchars($old['birthday'] ?? '') ?>">
+            <?php if (isset($errors['birthday'])): ?>
+                <span class="form__error"><?= htmlspecialchars($errors['birthday']) ?></span>
+            <?php endif; ?>
+        </div>
+
+        <div class="form__group <?= isset($errors['website']) ? 'form__group--error' : '' ?>">
+            <label for="reg_website" class="form__label">Вебсайт</label>
+            <input type="url" id="reg_website" name="website" class="form__input"
+                   value="<?= htmlspecialchars($old['website'] ?? '') ?>"
+                   placeholder="https://example.com">
+            <?php if (isset($errors['website'])): ?>
+                <span class="form__error"><?= htmlspecialchars($errors['website']) ?></span>
+            <?php endif; ?>
         </div>
     </div>
 

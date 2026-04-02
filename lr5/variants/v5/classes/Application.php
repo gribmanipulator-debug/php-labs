@@ -35,12 +35,29 @@ class Application
     private function initDatabase(): void
     {
         $dbPath = ROOT_DIR . '/database/app.db';
-        if (!file_exists($dbPath)) {
-            $schemaPath = ROOT_DIR . '/database/schema.sql';
-            if (file_exists($schemaPath)) {
-                $db = Database::getInstance();
-                $db->exec(file_get_contents($schemaPath));
+        $schemaPath = ROOT_DIR . '/database/schema.sql';
+        if (!file_exists($schemaPath)) {
+            return;
+        }
+
+        $db = Database::getInstance();
+        $needInit = !file_exists($dbPath);
+        $dbConfig = require ROOT_DIR . '/config/database.php';
+        $dsn = (string)($dbConfig['dsn'] ?? '');
+
+        if (!$needInit) {
+            if (strpos($dsn, 'sqlite:') === 0) {
+                $stmt = $db->prepare("SELECT name FROM sqlite_master WHERE type='table' AND name=:table");
+                $stmt->execute([':table' => 'cars']);
+                $needInit = !$stmt->fetch();
+            } else {
+                $stmt = $db->query("SHOW TABLES LIKE 'cars'");
+                $needInit = !$stmt->fetch();
             }
+        }
+
+        if ($needInit) {
+            $db->exec(file_get_contents($schemaPath));
         }
     }
 

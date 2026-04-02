@@ -60,6 +60,27 @@ $errors = $errors ?? [];
         </div>
     </div>
 
+    <div class="form__row">
+        <div class="form__group <?= isset($errors['birthday']) ? 'form__group--error' : '' ?>">
+            <label for="edit_birthday" class="form__label">Дата народження</label>
+            <input type="date" id="edit_birthday" name="birthday" class="form__input"
+                   value="<?= htmlspecialchars($user['birthday'] ?? '') ?>">
+            <?php if (isset($errors['birthday'])): ?>
+                <span class="form__error"><?= htmlspecialchars($errors['birthday']) ?></span>
+            <?php endif; ?>
+        </div>
+
+        <div class="form__group <?= isset($errors['website']) ? 'form__group--error' : '' ?>">
+            <label for="edit_website" class="form__label">Вебсайт</label>
+            <input type="url" id="edit_website" name="website" class="form__input"
+                   value="<?= htmlspecialchars($user['website'] ?? '') ?>"
+                   placeholder="https://example.com">
+            <?php if (isset($errors['website'])): ?>
+                <span class="form__error"><?= htmlspecialchars($errors['website']) ?></span>
+            <?php endif; ?>
+        </div>
+    </div>
+
     <fieldset class="form__group form__fieldset">
         <legend class="form__label">Стать</legend>
         <div class="form__radio-group">

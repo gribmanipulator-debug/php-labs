@@ -1,6 +1,6 @@
 <?php
 $colors = $colors ?? [];
-$currentColor = $currentColor ?? '#f9fafb';
+$currentColor = $currentColor ?? '#F8F8FF';
 $message = $message ?? '';
 $error = $error ?? '';
 ?>

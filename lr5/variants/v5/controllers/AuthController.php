@@ -26,8 +26,8 @@ class AuthController extends PageController
 
             if (empty($errors)) {
                 $stmt = $this->db->prepare(
-                    'INSERT INTO users (login, password, email, first_name, last_name, phone, city, gender, about)
-                     VALUES (:login, :password, :email, :first_name, :last_name, :phone, :city, :gender, :about)'
+                    'INSERT INTO users (login, password, email, first_name, last_name, phone, city, gender, about, birthday, website)
+                     VALUES (:login, :password, :email, :first_name, :last_name, :phone, :city, :gender, :about, :birthday, :website)'
                 );
                 $stmt->execute([
                     ':login' => trim($old['login']),
@@ -39,6 +39,8 @@ class AuthController extends PageController
                     ':city' => trim($old['city'] ?? ''),
                     ':gender' => $old['gender'] ?? '',
                     ':about' => trim($old['about'] ?? ''),
+                    ':birthday' => trim($old['birthday'] ?? ''),
+                    ':website' => trim($old['website'] ?? ''),
                 ]);
 
                 session_regenerate_id(true);
@@ -139,7 +141,8 @@ class AuthController extends PageController
             if (empty($errors)) {
                 $stmt = $this->db->prepare(
                     'UPDATE users SET email = :email, first_name = :first_name, last_name = :last_name,
-                     phone = :phone, city = :city, gender = :gender, about = :about WHERE id = :id'
+                     phone = :phone, city = :city, gender = :gender, about = :about,
+                     birthday = :birthday, website = :website WHERE id = :id'
                 );
                 $stmt->execute([
                     ':email' => trim($data['email']),
@@ -149,6 +152,8 @@ class AuthController extends PageController
                     ':city' => trim($data['city'] ?? ''),
                     ':gender' => $data['gender'] ?? '',
                     ':about' => trim($data['about'] ?? ''),
+                    ':birthday' => trim($data['birthday'] ?? ''),
+                    ':website' => trim($data['website'] ?? ''),
                     ':id' => $user['id'],
                 ]);
 
@@ -221,8 +226,8 @@ class AuthController extends PageController
         $len = function_exists('mb_strlen') ? mb_strlen($password) : strlen($password);
         if ($password === '') {
             $errors['password'] = 'Пароль є обов\'язковим.';
-        } elseif ($len < 6) {
-            $errors['password'] = 'Пароль має бути не менше 6 символів.';
+        } elseif ($len < 8) {
+            $errors['password'] = 'Пароль має бути не менше 8 символів.';
         }
 
         $passwordConfirm = $data['password_confirm'] ?? '';
@@ -244,6 +249,16 @@ class AuthController extends PageController
             $errors['last_name'] = 'Прізвище є обов\'язковим.';
         }
 
+        $birthday = trim($data['birthday'] ?? '');
+        if ($birthday !== '' && !preg_match('/^\d{4}-\d{2}-\d{2}$/', $birthday)) {
+            $errors['birthday'] = 'Дата народження має формат YYYY-MM-DD.';
+        }
+
+        $website = trim($data['website'] ?? '');
+        if ($website !== '' && !filter_var($website, FILTER_VALIDATE_URL)) {
+            $errors['website'] = 'Вкажіть коректний URL сайту (https://...).';
+        }
+
         return $errors;
     }
 
@@ -263,6 +278,16 @@ class AuthController extends PageController
         }
         if (trim($data['last_name'] ?? '') === '') {
             $errors['last_name'] = 'Прізвище є обов\'язковим.';
+        }
+
+        $birthday = trim($data['birthday'] ?? '');
+        if ($birthday !== '' && !preg_match('/^\d{4}-\d{2}-\d{2}$/', $birthday)) {
+            $errors['birthday'] = 'Дата народження має формат YYYY-MM-DD.';
+        }
+
+        $website = trim($data['website'] ?? '');
+        if ($website !== '' && !filter_var($website, FILTER_VALIDATE_URL)) {
+            $errors['website'] = 'Вкажіть коректний URL сайту (https://...).';
         }
 
         return $errors;

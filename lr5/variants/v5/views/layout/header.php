@@ -1,5 +1,5 @@
 <?php
-$bgColor = $_SESSION['bg_color'] ?? '#f9fafb';
+$bgColor = $_SESSION['bg_color'] ?? '#F8F8FF';
 $greetingName = $_COOKIE['greeting_name'] ?? '';
 $greetingGender = $_COOKIE['greeting_gender'] ?? '';
 
@@ -19,7 +19,7 @@ $navItems = [
     'guestbook/index' => 'Гостьова книга',
     'upload/index' => 'Завантаження',
     'folder/create' => 'Каталоги',
-    'recipe/list' => 'Рецепти',
+    'catalog/list' => 'Каталог авто',
     'settings/color' => 'Налаштування',
 ];
 ?>
@@ -28,7 +28,7 @@ $navItems = [
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?= htmlspecialchars($pageTitle ?? 'Кулінарний блог') ?> — Кулінарний блог (v30)</title>
+    <title><?= htmlspecialchars($pageTitle ?? 'Автосалон') ?> — Автосалон (v5)</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body style="background-color: <?= htmlspecialchars($bgColor) ?>">
@@ -36,7 +36,7 @@ $navItems = [
     <header class="header">
         <div class="container">
             <div class="header__inner">
-                <a href="index.php" class="header__logo">Кулінарний блог</a>
+                <a href="index.php" class="header__logo">Автосалон</a>
                 <div class="header__right">
                     <?php if ($greetingText !== ''): ?>
                         <span class="header__greeting"><?= $greetingText ?></span>
