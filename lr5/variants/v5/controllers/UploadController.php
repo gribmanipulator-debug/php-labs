@@ -24,22 +24,24 @@ class UploadController extends PageController
 
         if ($this->request->isPost() && isset($_FILES['image'])) {
             $file = $_FILES['image'];
+            $ext = strtolower(pathinfo($file['name'] ?? '', PATHINFO_EXTENSION));
 
             if ($file['error'] !== UPLOAD_ERR_OK) {
                 $error = 'Помилка завантаження файлу (код: ' . $file['error'] . ').';
             } elseif ($file['size'] > $this->maxSize) {
                 $error = 'Максимальний розмір файлу: 5 МБ.';
-            } elseif (!class_exists('finfo')) {
-                $error = 'Розширення fileinfo не встановлено на сервері.';
+            } elseif (!in_array($ext, $this->allowedExtensions, true)) {
+                $error = 'Дозволені формати: JPEG, PNG, GIF, WebP.';
             } else {
-                $ext = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
-                $finfo = new finfo(FILEINFO_MIME_TYPE);
-                $realType = $finfo->file($file['tmp_name']);
-                if (!in_array($ext, $this->allowedExtensions, true) || !in_array($realType, $this->allowedMimeTypes, true)) {
+                $realType = $this->detectMimeType((string)$file['tmp_name']);
+                if ($realType === null) {
+                    $error = 'Не вдалося визначити тип файлу. Спробуйте інше зображення.';
+                } elseif (!in_array($realType, $this->allowedMimeTypes, true)) {
                     $error = 'Дозволені формати: JPEG, PNG, GIF, WebP.';
                 }
             }
-            if ($error === '' && isset($ext)) {
+
+            if ($error === '' && $ext !== '') {
                 $safeName = time() . '_' . bin2hex(random_bytes(4)) . '.' . $ext;
                 $dest = $this->uploadDir . '/' . $safeName;
 
@@ -78,5 +80,38 @@ class UploadController extends PageController
         }
 
         return $images;
+    }
+
+    private function detectMimeType(string $tmpPath): ?string
+    {
+        if (class_exists('finfo')) {
+            $finfo = new finfo(FILEINFO_MIME_TYPE);
+            $mime = $finfo->file($tmpPath);
+            if (is_string($mime) && $mime !== '') {
+                return $mime;
+            }
+        }
+
+        if (function_exists('exif_imagetype')) {
+            $type = exif_imagetype($tmpPath);
+            $map = [
+                IMAGETYPE_JPEG => 'image/jpeg',
+                IMAGETYPE_PNG => 'image/png',
+                IMAGETYPE_GIF => 'image/gif',
+                IMAGETYPE_WEBP => 'image/webp',
+            ];
+            if ($type !== false && isset($map[$type])) {
+                return $map[$type];
+            }
+        }
+
+        if (function_exists('getimagesize')) {
+            $imgInfo = getimagesize($tmpPath);
+            if (is_array($imgInfo) && isset($imgInfo['mime']) && is_string($imgInfo['mime'])) {
+                return $imgInfo['mime'];
+            }
+        }
+
+        return null;
     }
 }
