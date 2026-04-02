@@ -5,7 +5,7 @@ $errors = $errors ?? [];
 ?>
 
 <h1>Гостьова книга</h1>
-<p>Коментарі зберігаються у файлі <code>data/comments.jsonl</code> (формат: JSON Lines).</p>
+<p>Коментарі зберігаються у файлі <code>data/comments.txt</code> у форматі <code>дата|ім'я|коментар</code>.</p>
 
 <?php if ($message !== ''): ?>
     <div class="alert alert--success"><?= htmlspecialchars($message) ?></div>
