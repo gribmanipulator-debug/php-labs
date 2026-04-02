@@ -14,4 +14,3 @@
 - Наприклад: `windows.md`, `macos.md`, `common.md`, `mysql.md` тощо.
 =======
 - [Windows](windows.md) — PHP не розпізнається, Scoop від адміністратора, PATH, кирилиця в імені
->>>>>>> upstream/main
