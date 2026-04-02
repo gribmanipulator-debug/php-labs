@@ -21,9 +21,7 @@ class UploadController extends PageController
 
     public function action_index(): void
     {
-        $message = '';
-        $error = '';
-        $oldTitle = '';
+        [$message, $error, $oldTitle] = $this->pullFlashState();
 
         if ($this->request->isPost()) {
             $deleteFile = trim((string)$this->request->post('delete_file', ''));
@@ -34,6 +32,10 @@ class UploadController extends PageController
                 $oldTitle = trim((string)$this->request->post('image_title', ''));
                 [$message, $error, $oldTitle] = $this->handleUpload($oldTitle);
             }
+
+            $this->storeFlashState($message, $error, $oldTitle);
+            $this->redirect('upload/index');
+            return;
         }
 
         $images = $this->getImages();
@@ -44,6 +46,24 @@ class UploadController extends PageController
             'error' => $error,
             'oldTitle' => $oldTitle,
         ], 'Завантаження зображень');
+    }
+
+    private function pullFlashState(): array
+    {
+        $message = (string)($_SESSION['upload_flash_message'] ?? '');
+        $error = (string)($_SESSION['upload_flash_error'] ?? '');
+        $oldTitle = (string)($_SESSION['upload_flash_old_title'] ?? '');
+
+        unset($_SESSION['upload_flash_message'], $_SESSION['upload_flash_error'], $_SESSION['upload_flash_old_title']);
+
+        return [$message, $error, $oldTitle];
+    }
+
+    private function storeFlashState(string $message, string $error, string $oldTitle): void
+    {
+        $_SESSION['upload_flash_message'] = $message;
+        $_SESSION['upload_flash_error'] = $error;
+        $_SESSION['upload_flash_old_title'] = $oldTitle;
     }
 
     private function handleDelete(string $deleteFile): array
