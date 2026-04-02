@@ -2,6 +2,7 @@
 $comments = $comments ?? [];
 $message = $message ?? '';
 $errors = $errors ?? [];
+$old = $old ?? [];
 ?>
 
 <h1>Гостьова книга</h1>
@@ -16,7 +17,7 @@ $errors = $errors ?? [];
     <div class="form__group <?= isset($errors['name']) ? 'form__group--error' : '' ?>">
         <label for="gb_name" class="form__label">Ім'я <span class="required">*</span></label>
         <input type="text" id="gb_name" name="name" class="form__input"
-               value="<?= htmlspecialchars($_POST['name'] ?? '') ?>"
+               value="<?= htmlspecialchars($old['name'] ?? '') ?>"
                placeholder="Ваше ім'я">
         <?php if (isset($errors['name'])): ?>
             <span class="form__error"><?= htmlspecialchars($errors['name']) ?></span>
@@ -26,7 +27,7 @@ $errors = $errors ?? [];
     <div class="form__group <?= isset($errors['comment']) ? 'form__group--error' : '' ?>">
         <label for="gb_comment" class="form__label">Коментар <span class="required">*</span></label>
         <textarea id="gb_comment" name="comment" class="form__textarea"
-                  placeholder="Ваш коментар..."><?= htmlspecialchars($_POST['comment'] ?? '') ?></textarea>
+                  placeholder="Ваш коментар..."><?= htmlspecialchars($old['comment'] ?? '') ?></textarea>
         <?php if (isset($errors['comment'])): ?>
             <span class="form__error"><?= htmlspecialchars($errors['comment']) ?></span>
         <?php endif; ?>
