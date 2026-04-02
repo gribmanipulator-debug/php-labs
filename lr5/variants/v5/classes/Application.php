@@ -59,6 +59,119 @@ class Application
         if ($needInit) {
             $db->exec(file_get_contents($schemaPath));
         }
+
+        $this->migrateUsersTable($db, $dsn);
+    }
+
+    private function migrateUsersTable(PDO $db, string $dsn): void
+    {
+        if (strpos($dsn, 'sqlite:') === 0) {
+            if (!$this->sqliteTableExists($db, 'users')) {
+                $db->exec(
+                    'CREATE TABLE IF NOT EXISTS users (
+                        id INTEGER PRIMARY KEY AUTOINCREMENT,
+                        login VARCHAR(50) NOT NULL UNIQUE,
+                        password VARCHAR(255) NOT NULL,
+                        email VARCHAR(100) NOT NULL,
+                        first_name VARCHAR(50) NOT NULL,
+                        last_name VARCHAR(50) NOT NULL,
+                        phone VARCHAR(20) DEFAULT \'\',
+                        city VARCHAR(50) DEFAULT \'\',
+                        gender VARCHAR(10) DEFAULT \'\',
+                        about TEXT DEFAULT \'\',
+                        birthday DATE DEFAULT NULL,
+                        website VARCHAR(200) DEFAULT \'\',
+                        created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+                    )'
+                );
+                return;
+            }
+
+            if (!$this->sqliteColumnExists($db, 'users', 'birthday')) {
+                $db->exec('ALTER TABLE users ADD COLUMN birthday DATE DEFAULT NULL');
+            }
+
+            if (!$this->sqliteColumnExists($db, 'users', 'website')) {
+                $db->exec("ALTER TABLE users ADD COLUMN website VARCHAR(200) DEFAULT ''");
+            }
+            return;
+        }
+
+        if (!$this->mysqlTableExists($db, 'users')) {
+            $db->exec(
+                'CREATE TABLE IF NOT EXISTS users (
+                    id INT AUTO_INCREMENT PRIMARY KEY,
+                    login VARCHAR(50) NOT NULL UNIQUE,
+                    password VARCHAR(255) NOT NULL,
+                    email VARCHAR(100) NOT NULL,
+                    first_name VARCHAR(50) NOT NULL,
+                    last_name VARCHAR(50) NOT NULL,
+                    phone VARCHAR(20) DEFAULT \'\',
+                    city VARCHAR(50) DEFAULT \'\',
+                    gender VARCHAR(10) DEFAULT \'\',
+                    about TEXT,
+                    birthday DATE NULL,
+                    website VARCHAR(200) DEFAULT \'\',
+                    created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+                )'
+            );
+            return;
+        }
+
+        if (!$this->mysqlColumnExists($db, 'users', 'birthday')) {
+            $db->exec('ALTER TABLE users ADD COLUMN birthday DATE NULL');
+        }
+
+        if (!$this->mysqlColumnExists($db, 'users', 'website')) {
+            $db->exec("ALTER TABLE users ADD COLUMN website VARCHAR(200) DEFAULT ''");
+        }
+    }
+
+    private function sqliteColumnExists(PDO $db, string $table, string $column): bool
+    {
+        $stmt = $db->query('PRAGMA table_info(' . $table . ')');
+        $columns = $stmt ? $stmt->fetchAll() : [];
+
+        foreach ($columns as $col) {
+            if (($col['name'] ?? '') === $column) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private function sqliteTableExists(PDO $db, string $table): bool
+    {
+        $stmt = $db->prepare("SELECT name FROM sqlite_master WHERE type='table' AND name=:table");
+        $stmt->execute([':table' => $table]);
+        return (bool)$stmt->fetch();
+    }
+
+    private function mysqlColumnExists(PDO $db, string $table, string $column): bool
+    {
+        $stmt = $db->prepare(
+            'SELECT COUNT(*) AS cnt FROM INFORMATION_SCHEMA.COLUMNS
+             WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = :table AND COLUMN_NAME = :column'
+        );
+        $stmt->execute([
+            ':table' => $table,
+            ':column' => $column,
+        ]);
+
+        $row = $stmt->fetch();
+        return (int)($row['cnt'] ?? 0) > 0;
+    }
+
+    private function mysqlTableExists(PDO $db, string $table): bool
+    {
+        $stmt = $db->prepare(
+            'SELECT COUNT(*) AS cnt FROM INFORMATION_SCHEMA.TABLES
+             WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = :table'
+        );
+        $stmt->execute([':table' => $table]);
+        $row = $stmt->fetch();
+        return (int)($row['cnt'] ?? 0) > 0;
     }
 
     private function show404(string $message): void

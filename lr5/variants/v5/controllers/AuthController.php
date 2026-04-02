@@ -25,29 +25,35 @@ class AuthController extends PageController
             $errors = $this->validateRegister($old);
 
             if (empty($errors)) {
-                $stmt = $this->db->prepare(
-                    'INSERT INTO users (login, password, email, first_name, last_name, phone, city, gender, about, birthday, website)
-                     VALUES (:login, :password, :email, :first_name, :last_name, :phone, :city, :gender, :about, :birthday, :website)'
-                );
-                $stmt->execute([
-                    ':login' => trim($old['login']),
-                    ':password' => password_hash($old['password'], PASSWORD_DEFAULT),
-                    ':email' => trim($old['email']),
-                    ':first_name' => trim($old['first_name']),
-                    ':last_name' => trim($old['last_name']),
-                    ':phone' => trim($old['phone'] ?? ''),
-                    ':city' => trim($old['city'] ?? ''),
-                    ':gender' => $old['gender'] ?? '',
-                    ':about' => trim($old['about'] ?? ''),
-                    ':birthday' => trim($old['birthday'] ?? ''),
-                    ':website' => trim($old['website'] ?? ''),
-                ]);
+                try {
+                    $birthday = trim($old['birthday'] ?? '');
+                    $stmt = $this->db->prepare(
+                        'INSERT INTO users (login, password, email, first_name, last_name, phone, city, gender, about, birthday, website)
+                         VALUES (:login, :password, :email, :first_name, :last_name, :phone, :city, :gender, :about, :birthday, :website)'
+                    );
+                    $stmt->execute([
+                        ':login' => trim($old['login']),
+                        ':password' => password_hash($old['password'], PASSWORD_DEFAULT),
+                        ':email' => trim($old['email']),
+                        ':first_name' => trim($old['first_name']),
+                        ':last_name' => trim($old['last_name']),
+                        ':phone' => trim($old['phone'] ?? ''),
+                        ':city' => trim($old['city'] ?? ''),
+                        ':gender' => $old['gender'] ?? '',
+                        ':about' => trim($old['about'] ?? ''),
+                        ':birthday' => $birthday !== '' ? $birthday : null,
+                        ':website' => trim($old['website'] ?? ''),
+                    ]);
 
-                session_regenerate_id(true);
-                $_SESSION['user_id'] = $this->db->lastInsertId();
-                $_SESSION['user_login'] = trim($old['login']);
-                $this->redirect('auth/profile');
-                return;
+                    session_regenerate_id(true);
+                    $_SESSION['user_id'] = $this->db->lastInsertId();
+                    $_SESSION['user_login'] = trim($old['login']);
+                    $this->redirect('auth/profile');
+                    return;
+                } catch (PDOException $e) {
+                    error_log('Register error: ' . $e->getMessage());
+                    $errors['db'] = 'Не вдалося створити акаунт. Спробуйте ще раз.';
+                }
             }
         }
 
@@ -139,6 +145,7 @@ class AuthController extends PageController
             $errors = $this->validateEdit($data, $user);
 
             if (empty($errors)) {
+                $birthday = trim($data['birthday'] ?? '');
                 $stmt = $this->db->prepare(
                     'UPDATE users SET email = :email, first_name = :first_name, last_name = :last_name,
                      phone = :phone, city = :city, gender = :gender, about = :about,
@@ -152,7 +159,7 @@ class AuthController extends PageController
                     ':city' => trim($data['city'] ?? ''),
                     ':gender' => $data['gender'] ?? '',
                     ':about' => trim($data['about'] ?? ''),
-                    ':birthday' => trim($data['birthday'] ?? ''),
+                    ':birthday' => $birthday !== '' ? $birthday : null,
                     ':website' => trim($data['website'] ?? ''),
                     ':id' => $user['id'],
                 ]);
