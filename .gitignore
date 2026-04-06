@@ -32,3 +32,6 @@ Thumbs.db
 
 # Source PDFs (lab assignment originals)
 lr5/*.pdf
+
+# Runtime data (lr5 v5)
+lr5/variants/v5/data/comments.txt
