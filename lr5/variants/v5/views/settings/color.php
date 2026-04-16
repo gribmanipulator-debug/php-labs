@@ -1,7 +1,6 @@
 <?php
 $colors = $colors ?? [];
 $currentColor = $currentColor ?? '#F8F8FF';
-$message = $message ?? '';
 $error = $error ?? '';
 ?>
 
@@ -11,10 +10,6 @@ $error = $error ?? '';
 
 <?php if ($error !== ''): ?>
     <div class="alert alert--error"><?= htmlspecialchars($error) ?></div>
-<?php endif; ?>
-
-<?php if ($message !== ''): ?>
-    <div class="alert alert--success"><?= htmlspecialchars($message) ?></div>
 <?php endif; ?>
 
 <form method="POST" action="index.php?route=settings/color" class="form">
@@ -29,9 +24,36 @@ $error = $error ?? '';
         <?php endforeach; ?>
     </div>
 
-    <div class="form__actions">
-        <button type="submit" class="btn">Зберегти колір</button>
-    </div>
 </form>
+
+<script>
+(() => {
+    const form = document.querySelector('.form');
+    const items = Array.from(document.querySelectorAll('.color-picker__item'));
+    const inputs = Array.from(document.querySelectorAll('input[name="bg_color"]'));
+
+    if (!form || inputs.length === 0) {
+        return;
+    }
+
+    const syncSelectedState = (selectedInput) => {
+        items.forEach((item) => item.classList.remove('color-picker__item--active'));
+
+        const activeItem = selectedInput.closest('.color-picker__item');
+        if (activeItem) {
+            activeItem.classList.add('color-picker__item--active');
+        }
+
+        document.body.style.backgroundColor = selectedInput.value;
+    };
+
+    inputs.forEach((input) => {
+        input.addEventListener('change', () => {
+            syncSelectedState(input);
+            form.submit();
+        });
+    });
+})();
+</script>
 
 <p class="text-muted text-muted--mt">Модуль успадковано з ЛР4. Також доступне <a href="index.php?route=settings/greeting">привітання через Cookie</a>.</p>

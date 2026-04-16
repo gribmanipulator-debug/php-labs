@@ -12,7 +12,6 @@ class SettingsController extends PageController
 
     public function action_color(): void
     {
-        $message = '';
         $error = '';
 
         if ($this->request->isPost()) {
@@ -20,7 +19,10 @@ class SettingsController extends PageController
 
             if (array_key_exists($color, $this->availableColors)) {
                 $_SESSION['bg_color'] = $color;
-                $message = 'Колір фону збережено!';
+                $_SESSION['flash_success'] = 'Колір фону збережено!';
+
+                header('Location: index.php?route=settings/color');
+                exit;
             } else {
                 $error = 'Невідомий колір.';
             }
@@ -29,7 +31,6 @@ class SettingsController extends PageController
         $this->render('settings/color', [
             'colors' => $this->availableColors,
             'currentColor' => $_SESSION['bg_color'] ?? '#F8F8FF',
-            'message' => $message,
             'error' => $error,
         ], 'Колір фону');
     }
